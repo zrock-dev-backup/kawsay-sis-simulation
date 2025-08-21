@@ -1,0 +1,744 @@
+basePath: /ims/oneroster/v1p1
+definitions:
+  main.AcademicSession:
+    description: Represents a time period in the academic calendar, such as a term,
+      semester, or grading period.
+    properties:
+      children:
+        items:
+          $ref: '#/definitions/main.GUIDRef'
+        type: array
+      dateLastModified:
+        type: string
+      endDate:
+        type: string
+      metadata: {}
+      parent:
+        $ref: '#/definitions/main.GUIDRef'
+      schoolYear:
+        type: string
+      sourcedId:
+        type: string
+      startDate:
+        type: string
+      status:
+        type: string
+      title:
+        type: string
+      type:
+        description: '''gradingPeriod'', ''semester'', ''schoolYear'', ''term'''
+        type: string
+    type: object
+  main.Category:
+    description: Represents a grading category within a class.
+    properties:
+      dateLastModified:
+        type: string
+      metadata: {}
+      sourcedId:
+        type: string
+      status:
+        type: string
+      title:
+        type: string
+      weight:
+        type: integer
+    type: object
+  main.Class:
+    description: Represents a specific instance of a course for a particular term
+      and school.
+    properties:
+      classCode:
+        type: string
+      classType:
+        description: '''homeroom'', ''scheduled'''
+        type: string
+      course:
+        $ref: '#/definitions/main.GUIDRef'
+      dateLastModified:
+        type: string
+      grades:
+        items:
+          type: string
+        type: array
+      location:
+        type: string
+      metadata: {}
+      periods:
+        items:
+          type: string
+        type: array
+      resources:
+        items:
+          $ref: '#/definitions/main.GUIDRef'
+        type: array
+      school:
+        $ref: '#/definitions/main.GUIDRef'
+      sourcedId:
+        type: string
+      status:
+        type: string
+      subjectCodes:
+        items:
+          type: string
+        type: array
+      subjects:
+        items:
+          type: string
+        type: array
+      terms:
+        items:
+          $ref: '#/definitions/main.GUIDRef'
+        type: array
+      title:
+        type: string
+    type: object
+  main.Course:
+    description: Represents a course in the course catalog.
+    properties:
+      courseCode:
+        type: string
+      dateLastModified:
+        type: string
+      grades:
+        items:
+          type: string
+        type: array
+      metadata: {}
+      resources:
+        items:
+          $ref: '#/definitions/main.GUIDRef'
+        type: array
+      schoolYear:
+        $ref: '#/definitions/main.GUIDRef'
+      sourcedId:
+        type: string
+      status:
+        type: string
+      subjectCodes:
+        items:
+          type: string
+        type: array
+      subjects:
+        items:
+          type: string
+        type: array
+      title:
+        type: string
+    type: object
+  main.Enrollment:
+    description: Represents the link between a user and a class for a specific role.
+    properties:
+      beginDate:
+        type: string
+      class:
+        $ref: '#/definitions/main.GUIDRef'
+      dateLastModified:
+        type: string
+      endDate:
+        type: string
+      metadata: {}
+      primary:
+        type: boolean
+      role:
+        type: string
+      school:
+        $ref: '#/definitions/main.GUIDRef'
+      sourcedId:
+        type: string
+      status:
+        type: string
+      user:
+        $ref: '#/definitions/main.GUIDRef'
+    type: object
+  main.GUIDRef:
+    description: A reference to another OneRoster object.
+    properties:
+      href:
+        type: string
+      sourcedId:
+        type: string
+      type:
+        type: string
+    type: object
+  main.Org:
+    description: Represents an organization, such as a school or district.
+    properties:
+      children:
+        items:
+          $ref: '#/definitions/main.GUIDRef'
+        type: array
+      dateLastModified:
+        type: string
+      identifier:
+        type: string
+      metadata: {}
+      name:
+        type: string
+      parent:
+        $ref: '#/definitions/main.GUIDRef'
+      sourcedId:
+        type: string
+      status:
+        type: string
+      type:
+        description: e.g., 'school', 'district'
+        type: string
+    type: object
+  main.User:
+    description: Represents a person within the system, such as a student or a teacher.
+    properties:
+      dateLastModified:
+        type: string
+      email:
+        type: string
+      enabledUser:
+        type: boolean
+      familyName:
+        type: string
+      givenName:
+        type: string
+      identifier:
+        type: string
+      metadata: {}
+      orgs:
+        items:
+          $ref: '#/definitions/main.GUIDRef'
+        type: array
+      role:
+        description: '''student'', ''teacher'''
+        type: string
+      sourcedId:
+        type: string
+      status:
+        type: string
+      userIds:
+        items: {}
+        type: array
+      username:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: dev.agent@example.com
+    name: Kawsay Developer Agent
+    url: http://www.example.com
+  description: |-
+    This is a mock server for the OneRoster v1p1 API specification.
+    It serves a large, procedurally generated, in-memory dataset for testing purposes.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: OneRoster Mock API
+  version: "1.0"
+paths:
+  /academicSessions:
+    get:
+      description: Retrieves a collection of all academic sessions of any type.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              items:
+                $ref: '#/definitions/main.AcademicSession'
+              type: array
+            type: object
+      summary: Get all academic sessions
+      tags:
+      - Academic Sessions
+  /academicSessions/{id}:
+    get:
+      description: Retrieves a single academic session by its sourcedId.
+      parameters:
+      - description: SourcedId of the academic session
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              $ref: '#/definitions/main.AcademicSession'
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get a specific academic session
+      tags:
+      - Academic Sessions
+  /classes:
+    get:
+      description: Retrieves a collection of all scheduled classes.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              items:
+                $ref: '#/definitions/main.Class'
+              type: array
+            type: object
+      summary: Get all classes
+      tags:
+      - Classes
+  /classes/{id}:
+    get:
+      description: Retrieves a single class by its sourcedId.
+      parameters:
+      - description: SourcedId of the class
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              $ref: '#/definitions/main.Class'
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get a specific class
+      tags:
+      - Classes
+  /classes/{id}/categories:
+    get:
+      description: Retrieves a collection of grading categories for a given class.
+      parameters:
+      - description: SourcedId of the class
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              items:
+                $ref: '#/definitions/main.Category'
+              type: array
+            type: object
+      summary: Get categories for a class
+      tags:
+      - Classes
+  /courses:
+    get:
+      description: Retrieves a collection of all courses from the catalog.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              items:
+                $ref: '#/definitions/main.Course'
+              type: array
+            type: object
+      summary: Get all courses
+      tags:
+      - Courses
+  /courses/{id}:
+    get:
+      description: Retrieves a single course by its sourcedId.
+      parameters:
+      - description: SourcedId of the course
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              $ref: '#/definitions/main.Course'
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get a specific course
+      tags:
+      - Courses
+  /enrollments:
+    get:
+      description: Retrieves a collection of all user enrollments in classes.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              items:
+                $ref: '#/definitions/main.Enrollment'
+              type: array
+            type: object
+      summary: Get all enrollments
+      tags:
+      - Enrollments
+  /enrollments/{id}:
+    get:
+      description: Retrieves a single enrollment by its sourcedId.
+      parameters:
+      - description: SourcedId of the enrollment
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              $ref: '#/definitions/main.Enrollment'
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get a specific enrollment
+      tags:
+      - Enrollments
+  /gradingPeriods:
+    get:
+      description: Retrieves a collection of all academic sessions with type 'gradingPeriod'.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              items:
+                $ref: '#/definitions/main.AcademicSession'
+              type: array
+            type: object
+      summary: Get all grading periods
+      tags:
+      - Academic Sessions
+  /gradingPeriods/{id}:
+    get:
+      description: Retrieves a single grading period by its sourcedId.
+      parameters:
+      - description: SourcedId of the grading period
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              $ref: '#/definitions/main.AcademicSession'
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get a specific grading period
+      tags:
+      - Academic Sessions
+  /orgs:
+    get:
+      description: Retrieves a collection of all organizations, including schools
+        and districts.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              items:
+                $ref: '#/definitions/main.Org'
+              type: array
+            type: object
+      summary: Get all organizations
+      tags:
+      - Orgs
+  /orgs/{id}:
+    get:
+      description: Retrieves a single organization by its sourcedId.
+      parameters:
+      - description: SourcedId of the organization
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              $ref: '#/definitions/main.Org'
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get a specific organization
+      tags:
+      - Orgs
+  /schools:
+    get:
+      description: Retrieves a collection of all organizations with type 'school'.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              items:
+                $ref: '#/definitions/main.Org'
+              type: array
+            type: object
+      summary: Get all schools
+      tags:
+      - Schools
+  /schools/{id}:
+    get:
+      description: Retrieves a single school by its sourcedId.
+      parameters:
+      - description: SourcedId of the school
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              $ref: '#/definitions/main.Org'
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get a specific school
+      tags:
+      - Schools
+  /students:
+    get:
+      description: Retrieves a collection of all users with the role 'student'.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              items:
+                $ref: '#/definitions/main.User'
+              type: array
+            type: object
+      summary: Get all students
+      tags:
+      - Students
+  /students/{id}:
+    get:
+      description: Retrieves a single student by their sourcedId.
+      parameters:
+      - description: SourcedId of the student
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              $ref: '#/definitions/main.User'
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get a specific student
+      tags:
+      - Students
+  /teachers:
+    get:
+      description: Retrieves a collection of all users with the role 'teacher'.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              items:
+                $ref: '#/definitions/main.User'
+              type: array
+            type: object
+      summary: Get all teachers
+      tags:
+      - Teachers
+  /teachers/{id}:
+    get:
+      description: Retrieves a single teacher by their sourcedId.
+      parameters:
+      - description: SourcedId of the teacher
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              $ref: '#/definitions/main.User'
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get a specific teacher
+      tags:
+      - Teachers
+  /terms:
+    get:
+      description: Retrieves a collection of all academic sessions with type 'term'.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              items:
+                $ref: '#/definitions/main.AcademicSession'
+              type: array
+            type: object
+      summary: Get all terms
+      tags:
+      - Academic Sessions
+  /terms/{id}:
+    get:
+      description: Retrieves a single term by its sourcedId.
+      parameters:
+      - description: SourcedId of the term
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              $ref: '#/definitions/main.AcademicSession'
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get a specific term
+      tags:
+      - Academic Sessions
+  /users:
+    get:
+      description: Retrieves a collection of all users, including students and teachers.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              items:
+                $ref: '#/definitions/main.User'
+              type: array
+            type: object
+      summary: Get all users
+      tags:
+      - Users
+  /users/{id}:
+    get:
+      description: Retrieves a single user by their sourcedId.
+      parameters:
+      - description: SourcedId of the user
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              $ref: '#/definitions/main.User'
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get a specific user
+      tags:
+      - Users
+swagger: "2.0"
