@@ -24,7 +24,7 @@ func writeJSON(w http.ResponseWriter, status int, data any) {
 // @Description Retrieves a collection of all organizations, including schools and districts.
 // @Tags Orgs
 // @Produce json
-// @Success 200 {object} map[string][]Org
+// @Security ApiKeyAuth
 // @Router /orgs [get]
 func (h *APIHandlers) getOrgs(w http.ResponseWriter, r *http.Request) {
 	writeJSON(w, http.StatusOK, map[string][]Org{"orgs": h.Store.Orgs})
@@ -38,6 +38,7 @@ func (h *APIHandlers) getOrgs(w http.ResponseWriter, r *http.Request) {
 // @Param id path string true "SourcedId of the organization"
 // @Success 200 {object} map[string]Org
 // @Failure 404 {object} map[string]string
+// @Security ApiKeyAuth
 // @Router /orgs/{id} [get]
 func (h *APIHandlers) getOrg(w http.ResponseWriter, r *http.Request) {
 	id := chi.URLParam(r, "id")
@@ -56,6 +57,7 @@ func (h *APIHandlers) getOrg(w http.ResponseWriter, r *http.Request) {
 // @Tags Schools
 // @Produce json
 // @Success 200 {object} map[string][]Org
+// @Security ApiKeyAuth
 // @Router /schools [get]
 func (h *APIHandlers) getSchools(w http.ResponseWriter, r *http.Request) {
 	var schools []Org
@@ -75,6 +77,7 @@ func (h *APIHandlers) getSchools(w http.ResponseWriter, r *http.Request) {
 // @Param id path string true "SourcedId of the school"
 // @Success 200 {object} map[string]Org
 // @Failure 404 {object} map[string]string
+// @Security ApiKeyAuth
 // @Router /schools/{id} [get]
 func (h *APIHandlers) getSchool(w http.ResponseWriter, r *http.Request) {
 	id := chi.URLParam(r, "id")
@@ -93,6 +96,7 @@ func (h *APIHandlers) getSchool(w http.ResponseWriter, r *http.Request) {
 // @Tags Users
 // @Produce json
 // @Success 200 {object} map[string][]User
+// @Security ApiKeyAuth
 // @Router /users [get]
 func (h *APIHandlers) getUsers(w http.ResponseWriter, r *http.Request) {
 	writeJSON(w, http.StatusOK, map[string][]User{"users": h.Store.Users})
@@ -106,6 +110,7 @@ func (h *APIHandlers) getUsers(w http.ResponseWriter, r *http.Request) {
 // @Param id path string true "SourcedId of the user"
 // @Success 200 {object} map[string]User
 // @Failure 404 {object} map[string]string
+// @Security ApiKeyAuth
 // @Router /users/{id} [get]
 func (h *APIHandlers) getUser(w http.ResponseWriter, r *http.Request) {
 	id := chi.URLParam(r, "id")
@@ -124,6 +129,7 @@ func (h *APIHandlers) getUser(w http.ResponseWriter, r *http.Request) {
 // @Tags Teachers
 // @Produce json
 // @Success 200 {object} map[string][]User
+// @Security ApiKeyAuth
 // @Router /teachers [get]
 func (h *APIHandlers) getTeachers(w http.ResponseWriter, r *http.Request) {
 	var teachers []User
@@ -143,6 +149,7 @@ func (h *APIHandlers) getTeachers(w http.ResponseWriter, r *http.Request) {
 // @Param id path string true "SourcedId of the teacher"
 // @Success 200 {object} map[string]User
 // @Failure 404 {object} map[string]string
+// @Security ApiKeyAuth
 // @Router /teachers/{id} [get]
 func (h *APIHandlers) getTeacher(w http.ResponseWriter, r *http.Request) {
 	id := chi.URLParam(r, "id")
@@ -161,6 +168,7 @@ func (h *APIHandlers) getTeacher(w http.ResponseWriter, r *http.Request) {
 // @Tags Students
 // @Produce json
 // @Success 200 {object} map[string][]User
+// @Security ApiKeyAuth
 // @Router /students [get]
 func (h *APIHandlers) getStudents(w http.ResponseWriter, r *http.Request) {
 	var students []User
@@ -180,6 +188,7 @@ func (h *APIHandlers) getStudents(w http.ResponseWriter, r *http.Request) {
 // @Param id path string true "SourcedId of the student"
 // @Success 200 {object} map[string]User
 // @Failure 404 {object} map[string]string
+// @Security ApiKeyAuth
 // @Router /students/{id} [get]
 func (h *APIHandlers) getStudent(w http.ResponseWriter, r *http.Request) {
 	id := chi.URLParam(r, "id")
@@ -198,6 +207,7 @@ func (h *APIHandlers) getStudent(w http.ResponseWriter, r *http.Request) {
 // @Tags Courses
 // @Produce json
 // @Success 200 {object} map[string][]Course
+// @Security ApiKeyAuth
 // @Router /courses [get]
 func (h *APIHandlers) getCourses(w http.ResponseWriter, r *http.Request) {
 	writeJSON(w, http.StatusOK, map[string][]Course{"courses": h.Store.Courses})
@@ -211,6 +221,7 @@ func (h *APIHandlers) getCourses(w http.ResponseWriter, r *http.Request) {
 // @Param id path string true "SourcedId of the course"
 // @Success 200 {object} map[string]Course
 // @Failure 404 {object} map[string]string
+// @Security ApiKeyAuth
 // @Router /courses/{id} [get]
 func (h *APIHandlers) getCourse(w http.ResponseWriter, r *http.Request) {
 	id := chi.URLParam(r, "id")
@@ -229,6 +240,7 @@ func (h *APIHandlers) getCourse(w http.ResponseWriter, r *http.Request) {
 // @Tags Classes
 // @Produce json
 // @Success 200 {object} map[string][]Class
+// @Security ApiKeyAuth
 // @Router /classes [get]
 func (h *APIHandlers) getClasses(w http.ResponseWriter, r *http.Request) {
 	writeJSON(w, http.StatusOK, map[string][]Class{"classes": h.Store.Classes})
@@ -242,6 +254,7 @@ func (h *APIHandlers) getClasses(w http.ResponseWriter, r *http.Request) {
 // @Param id path string true "SourcedId of the class"
 // @Success 200 {object} map[string]Class
 // @Failure 404 {object} map[string]string
+// @Security ApiKeyAuth
 // @Router /classes/{id} [get]
 func (h *APIHandlers) getClass(w http.ResponseWriter, r *http.Request) {
 	id := chi.URLParam(r, "id")
@@ -261,6 +274,7 @@ func (h *APIHandlers) getClass(w http.ResponseWriter, r *http.Request) {
 // @Produce json
 // @Param id path string true "SourcedId of the class"
 // @Success 200 {object} map[string][]Category
+// @Security ApiKeyAuth
 // @Router /classes/{id}/categories [get]
 func (h *APIHandlers) getCategoriesForClass(w http.ResponseWriter, r *http.Request) {
 	// In this mock, categories are global, not class-specific.
@@ -274,6 +288,7 @@ func (h *APIHandlers) getCategoriesForClass(w http.ResponseWriter, r *http.Reque
 // @Tags Enrollments
 // @Produce json
 // @Success 200 {object} map[string][]Enrollment
+// @Security ApiKeyAuth
 // @Router /enrollments [get]
 func (h *APIHandlers) getEnrollments(w http.ResponseWriter, r *http.Request) {
 	writeJSON(w, http.StatusOK, map[string][]Enrollment{"enrollments": h.Store.Enrollments})
@@ -287,6 +302,7 @@ func (h *APIHandlers) getEnrollments(w http.ResponseWriter, r *http.Request) {
 // @Param id path string true "SourcedId of the enrollment"
 // @Success 200 {object} map[string]Enrollment
 // @Failure 404 {object} map[string]string
+// @Security ApiKeyAuth
 // @Router /enrollments/{id} [get]
 func (h *APIHandlers) getEnrollment(w http.ResponseWriter, r *http.Request) {
 	id := chi.URLParam(r, "id")
@@ -305,6 +321,7 @@ func (h *APIHandlers) getEnrollment(w http.ResponseWriter, r *http.Request) {
 // @Tags Academic Sessions
 // @Produce json
 // @Success 200 {object} map[string][]AcademicSession
+// @Security ApiKeyAuth
 // @Router /terms [get]
 func (h *APIHandlers) getTerms(w http.ResponseWriter, r *http.Request) {
 	var terms []AcademicSession
@@ -324,6 +341,7 @@ func (h *APIHandlers) getTerms(w http.ResponseWriter, r *http.Request) {
 // @Param id path string true "SourcedId of the term"
 // @Success 200 {object} map[string]AcademicSession
 // @Failure 404 {object} map[string]string
+// @Security ApiKeyAuth
 // @Router /terms/{id} [get]
 func (h *APIHandlers) getTerm(w http.ResponseWriter, r *http.Request) {
 	id := chi.URLParam(r, "id")
@@ -342,6 +360,7 @@ func (h *APIHandlers) getTerm(w http.ResponseWriter, r *http.Request) {
 // @Tags Academic Sessions
 // @Produce json
 // @Success 200 {object} map[string][]AcademicSession
+// @Security ApiKeyAuth
 // @Router /academicSessions [get]
 func (h *APIHandlers) getAcademicSessions(w http.ResponseWriter, r *http.Request) {
 	writeJSON(w, http.StatusOK, map[string][]AcademicSession{"academicSessions": h.Store.AcademicSessions})
@@ -355,6 +374,7 @@ func (h *APIHandlers) getAcademicSessions(w http.ResponseWriter, r *http.Request
 // @Param id path string true "SourcedId of the academic session"
 // @Success 200 {object} map[string]AcademicSession
 // @Failure 404 {object} map[string]string
+// @Security ApiKeyAuth
 // @Router /academicSessions/{id} [get]
 func (h *APIHandlers) getAcademicSession(w http.ResponseWriter, r *http.Request) {
 	id := chi.URLParam(r, "id")
@@ -373,6 +393,7 @@ func (h *APIHandlers) getAcademicSession(w http.ResponseWriter, r *http.Request)
 // @Tags Academic Sessions
 // @Produce json
 // @Success 200 {object} map[string][]AcademicSession
+// @Security ApiKeyAuth
 // @Router /gradingPeriods [get]
 func (h *APIHandlers) getGradingPeriods(w http.ResponseWriter, _ *http.Request) {
 	var periods []AcademicSession
@@ -392,6 +413,7 @@ func (h *APIHandlers) getGradingPeriods(w http.ResponseWriter, _ *http.Request) 
 // @Param id path string true "SourcedId of the grading period"
 // @Success 200 {object} map[string]AcademicSession
 // @Failure 404 {object} map[string]string
+// @Security ApiKeyAuth
 // @Router /gradingPeriods/{id} [get]
 func (h *APIHandlers) getGradingPeriod(w http.ResponseWriter, r *http.Request) {
 	id := chi.URLParam(r, "id")

@@ -25,6 +25,11 @@ const docTemplate = `{
     "paths": {
         "/academicSessions": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Retrieves a collection of all academic sessions of any type.",
                 "produces": [
                     "application/json"
@@ -51,6 +56,11 @@ const docTemplate = `{
         },
         "/academicSessions/{id}": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Retrieves a single academic session by its sourcedId.",
                 "produces": [
                     "application/json"
@@ -92,6 +102,11 @@ const docTemplate = `{
         },
         "/classes": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Retrieves a collection of all scheduled classes.",
                 "produces": [
                     "application/json"
@@ -118,6 +133,11 @@ const docTemplate = `{
         },
         "/classes/{id}": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Retrieves a single class by its sourcedId.",
                 "produces": [
                     "application/json"
@@ -159,6 +179,11 @@ const docTemplate = `{
         },
         "/classes/{id}/categories": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Retrieves a collection of grading categories for a given class.",
                 "produces": [
                     "application/json"
@@ -194,6 +219,11 @@ const docTemplate = `{
         },
         "/courses": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Retrieves a collection of all courses from the catalog.",
                 "produces": [
                     "application/json"
@@ -220,6 +250,11 @@ const docTemplate = `{
         },
         "/courses/{id}": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Retrieves a single course by its sourcedId.",
                 "produces": [
                     "application/json"
@@ -261,6 +296,11 @@ const docTemplate = `{
         },
         "/enrollments": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Retrieves a collection of all user enrollments in classes.",
                 "produces": [
                     "application/json"
@@ -287,6 +327,11 @@ const docTemplate = `{
         },
         "/enrollments/{id}": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Retrieves a single enrollment by its sourcedId.",
                 "produces": [
                     "application/json"
@@ -328,6 +373,11 @@ const docTemplate = `{
         },
         "/gradingPeriods": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Retrieves a collection of all academic sessions with type 'gradingPeriod'.",
                 "produces": [
                     "application/json"
@@ -354,6 +404,11 @@ const docTemplate = `{
         },
         "/gradingPeriods/{id}": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Retrieves a single grading period by its sourcedId.",
                 "produces": [
                     "application/json"
@@ -395,6 +450,11 @@ const docTemplate = `{
         },
         "/orgs": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Retrieves a collection of all organizations, including schools and districts.",
                 "produces": [
                     "application/json"
@@ -403,24 +463,16 @@ const docTemplate = `{
                     "Orgs"
                 ],
                 "summary": "Get all organizations",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "object",
-                            "additionalProperties": {
-                                "type": "array",
-                                "items": {
-                                    "$ref": "#/definitions/main.Org"
-                                }
-                            }
-                        }
-                    }
-                }
+                "responses": {}
             }
         },
         "/orgs/{id}": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Retrieves a single organization by its sourcedId.",
                 "produces": [
                     "application/json"
@@ -462,6 +514,11 @@ const docTemplate = `{
         },
         "/schools": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Retrieves a collection of all organizations with type 'school'.",
                 "produces": [
                     "application/json"
@@ -488,6 +545,11 @@ const docTemplate = `{
         },
         "/schools/{id}": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Retrieves a single school by its sourcedId.",
                 "produces": [
                     "application/json"
@@ -529,6 +591,11 @@ const docTemplate = `{
         },
         "/students": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Retrieves a collection of all users with the role 'student'.",
                 "produces": [
                     "application/json"
@@ -555,6 +622,11 @@ const docTemplate = `{
         },
         "/students/{id}": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Retrieves a single student by their sourcedId.",
                 "produces": [
                     "application/json"
@@ -596,6 +668,11 @@ const docTemplate = `{
         },
         "/teachers": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Retrieves a collection of all users with the role 'teacher'.",
                 "produces": [
                     "application/json"
@@ -622,6 +699,11 @@ const docTemplate = `{
         },
         "/teachers/{id}": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Retrieves a single teacher by their sourcedId.",
                 "produces": [
                     "application/json"
@@ -663,6 +745,11 @@ const docTemplate = `{
         },
         "/terms": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Retrieves a collection of all academic sessions with type 'term'.",
                 "produces": [
                     "application/json"
@@ -689,6 +776,11 @@ const docTemplate = `{
         },
         "/terms/{id}": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Retrieves a single term by its sourcedId.",
                 "produces": [
                     "application/json"
@@ -730,6 +822,11 @@ const docTemplate = `{
         },
         "/users": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Retrieves a collection of all users, including students and teachers.",
                 "produces": [
                     "application/json"
@@ -756,6 +853,11 @@ const docTemplate = `{
         },
         "/users/{id}": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Retrieves a single user by their sourcedId.",
                 "produces": [
                     "application/json"
@@ -1115,13 +1217,20 @@ const docTemplate = `{
                 }
             }
         }
+    },
+    "securityDefinitions": {
+        "ApiKeyAuth": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
     }
 }`
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
 	Version:          "1.0",
-	Host:             "localhost:8080",
+	Host:             "localhost:5100",
 	BasePath:         "/ims/oneroster/v1p1",
 	Schemes:          []string{},
 	Title:            "OneRoster Mock API",

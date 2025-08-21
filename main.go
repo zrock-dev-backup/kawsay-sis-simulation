@@ -25,8 +25,15 @@ import (
 // @license.name Apache 2.0
 // @license.url http://www.apache.org/licenses/LICENSE-2.0.html
 
-// @host localhost:8080
+// @host localhost:5100
 // @BasePath /ims/oneroster/v1p1
+
+// --- AÑADE ESTAS LÍNEAS PARA LA AUTENTICACIÓN ---
+// @securityDefinitions.apikey ApiKeyAuth
+// @in header
+// @name Authorization
+// --------------------------------------------------
+
 func main() {
 	log.Println("Generating mock data store...")
 	store := NewDataStore()
@@ -45,7 +52,7 @@ func main() {
 
 	// CORS for frontend development
 	r.Use(cors.Handler(cors.Options{
-		AllowedOrigins:   []string{"http://localhost:3000", "http://localhost:5173"}, // Add your C# dev server port if needed
+		AllowedOrigins:   []string{"http://localhost:3000", "http://localhost:5173", "http://localhost:5100"}, // Add your C# dev server port if needed
 		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
 		AllowedHeaders:   []string{"Accept", "Authorization", "Content-Type", "X-CSRF-Token"},
 		ExposedHeaders:   []string{"Link"},
