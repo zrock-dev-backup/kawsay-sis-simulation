@@ -1,5 +1,5 @@
 {
-  description = "Development environment with Node.js 20";
+  description = "Go dev environment";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -14,13 +14,9 @@
       {
         devShells.default = pkgs.mkShell {
           buildInputs = with pkgs; [
-            go
+            go_1_24
             go-swag
           ];
-
-          shellHook = ''
-          elvish
-          '';
         };
       }
     );
